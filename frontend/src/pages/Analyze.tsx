@@ -30,7 +30,9 @@ export default function Analyze() {
       const response = await api.post(
         "/career/analyze",
         {
-          user_id: 1,
+          user_id: Number(
+  localStorage.getItem("user_id")
+),
           role,
           current_skills: skills
             .split(",")

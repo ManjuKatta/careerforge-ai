@@ -21,7 +21,7 @@ export default function Projects() {
     setLoading(true);
 
     const response = await api.get(
-      "/projects/user/1"
+      `/projects/user/${localStorage.getItem("user_id")}`
     );
 
     setProjects(response.data);

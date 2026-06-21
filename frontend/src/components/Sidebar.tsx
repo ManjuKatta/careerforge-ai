@@ -32,6 +32,23 @@ export default function Sidebar() {
           </Link>
         ))}
       </nav>
+      <button
+  onClick={() => {
+    localStorage.clear();
+    window.location.href = "/login";
+  }}
+  className="
+  mt-auto
+  bg-red-500/20
+  text-red-400
+  rounded-xl
+  p-3
+  w-full
+  "
+>
+  Logout
+</button>
     </aside>
+    
   );
 }

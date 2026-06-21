@@ -21,7 +21,7 @@ export default function Dashboard() {
     try {
 
       const response = await api.get(
-        "/career/latest/1"
+        `/career/latest/${localStorage.getItem("user_id")}`
       );
 
       setData(response.data);

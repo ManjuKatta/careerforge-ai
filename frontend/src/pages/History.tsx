@@ -24,7 +24,7 @@ export default function History() {
   async function fetchHistory() {
     try {
       const response = await api.get(
-        "/career/history/1"
+        `/career/history/${localStorage.getItem("user_id")}`
       );
 
       setHistory(response.data);

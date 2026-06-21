@@ -7,52 +7,84 @@ import Analyze from "./pages/Analyze";
 import Projects from "./pages/Projects";
 import History from "./pages/History";
 import Settings from "./pages/Settings";
-
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 function App() {
+  const token = localStorage.getItem("token");
+
   return (
     <BrowserRouter>
 
-      <div className="flex min-h-screen bg-zinc-950 text-white">
+      <Routes>
 
-        <Sidebar />
+        <Route
+          path="/login"
+          element={<Login />}
+        />
 
-        <main className="flex-1 p-8 text-white">
+        <Route
+          path="/register"
+          element={<Register />}
+        />
 
-          <Routes>
+        {token ? (
 
-            <Route
-              path="/"
-              element={<Dashboard />}
-            />
+          <Route
+            path="/*"
+            element={
+              <div className="flex min-h-screen bg-zinc-950 text-white">
 
-            <Route
-              path="/analyze"
-              element={<Analyze />}
-            />
+                <Sidebar />
 
-            <Route
-              path="/projects"
-              element={<Projects />}
-            />
+                <main className="flex-1 p-8 text-white">
 
-            <Route
-              path="/history"
-              element={<History />}
-            />
+                  <Routes>
 
-            <Route
-              path="/settings"
-              element={<Settings />}
-            />
+                    <Route
+                      path="/"
+                      element={<Dashboard />}
+                    />
 
-          </Routes>
+                    <Route
+                      path="/analyze"
+                      element={<Analyze />}
+                    />
 
-        </main>
+                    <Route
+                      path="/projects"
+                      element={<Projects />}
+                    />
 
-      </div>
+                    <Route
+                      path="/history"
+                      element={<History />}
+                    />
+
+                    <Route
+                      path="/settings"
+                      element={<Settings />}
+                    />
+
+                  </Routes>
+
+                </main>
+
+              </div>
+            }
+          />
+
+        ) : (
+
+          <Route
+            path="*"
+            element={<Login />}
+          />
+
+        )}
+
+      </Routes>
 
     </BrowserRouter>
   );
 }
-
 export default App;

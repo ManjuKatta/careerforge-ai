@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,EmailStr, Field
 
 
 class User(BaseModel):
@@ -24,11 +24,10 @@ class CareerAnalysisRequest(BaseModel):
 
 
 class UserRegister(BaseModel):
-    name: str
-    email: str
-    password: str
-    target_role: str
-
+    name: str = Field(..., min_length=2)
+    email: EmailStr
+    password: str = Field(..., min_length=6)
+    target_role: str = Field(..., min_length=2)
 
 class UserLogin(BaseModel):
     email: str
