@@ -28,3 +28,8 @@ class UserRegister(BaseModel):
     email: str
     password: str
     target_role: str
+
+
+class UserLogin(BaseModel):
+    email: str
+    password: str
