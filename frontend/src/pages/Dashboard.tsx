@@ -1,0 +1,93 @@
+import ReadinessChart from "../components/ReadinessChart";
+import { useEffect, useState } from "react";
+import api from "../services/api";
+
+interface LatestAnalysis {
+  target_role: string;
+  readiness_score: number;
+  missing_skills: string;
+}
+
+export default function Dashboard() {
+
+  const [data, setData] =
+    useState<LatestAnalysis | null>(null);
+
+  useEffect(() => {
+    fetchDashboard();
+  }, []);
+
+  async function fetchDashboard() {
+    try {
+
+      const response = await api.get(
+        "/career/latest/1"
+      );
+
+      setData(response.data);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  return (
+    <div>
+
+      <div className="rounded-3xl p-10 bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-500 shadow-2xl">
+
+        <h1 className="text-5xl font-bold mb-4 text-white">
+          CareerForge AI
+        </h1>
+
+        <p className="text-xl text-white/90">
+          Transform your career with AI-powered guidance.
+        </p>
+
+      </div>
+
+      <div className="grid grid-cols-3 gap-6 mt-8">
+
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+
+          <p className="text-zinc-400">
+            Readiness Score
+          </p>
+
+          <h2 className="text-5xl font-bold mt-3 text-green-400">
+            {data?.readiness_score ?? 0}%
+          </h2>
+
+        </div>
+
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+
+          <p className="text-zinc-400">
+            Missing Skills
+          </p>
+
+          <h2 className="text-5xl font-bold mt-3">
+            {data?.missing_skills?.split(",").length ?? 0}
+          </h2>
+
+        </div>
+
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+
+          <p className="text-zinc-400">
+            Target Role
+          </p>
+
+          <h2 className="text-2xl font-bold mt-3">
+            {data?.target_role ?? "No Analysis"}
+          </h2>
+
+        </div>
+
+      </div>
+
+      <ReadinessChart />
+
+    </div>
+  );
+}
