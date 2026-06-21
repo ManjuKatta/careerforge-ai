@@ -21,3 +21,10 @@ class CareerAnalysisRequest(BaseModel):
     user_id: int
     role: str
     current_skills: list[str]
+
+
+class UserRegister(BaseModel):
+    name: str
+    email: str
+    password: str
+    target_role: str
