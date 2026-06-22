@@ -1,6 +1,6 @@
-import ReadinessChart from "../components/ReadinessChart";
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import ReadinessChart from "../components/ReadinessChart";
 
 interface LatestAnalysis {
   target_role: string;
@@ -20,8 +20,11 @@ export default function Dashboard() {
   async function fetchDashboard() {
     try {
 
+      const userId =
+        localStorage.getItem("user_id");
+
       const response = await api.get(
-        `/career/latest/${localStorage.getItem("user_id")}`
+        `/career/latest/${userId}`
       );
 
       setData(response.data);
@@ -34,17 +37,24 @@ export default function Dashboard() {
   return (
     <div>
 
+      {/* Hero */}
+
       <div className="rounded-3xl p-10 bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-500 shadow-2xl">
 
         <h1 className="text-5xl font-bold mb-4 text-white">
-          CareerForge AI
+          Welcome back,
+          {" "}
+          {localStorage.getItem("name")}
+          👋
         </h1>
 
         <p className="text-xl text-white/90">
-          Transform your career with AI-powered guidance.
+          Continue building your dream career.
         </p>
 
       </div>
+
+      {/* Stats */}
 
       <div className="grid grid-cols-3 gap-6 mt-8">
 
@@ -67,7 +77,12 @@ export default function Dashboard() {
           </p>
 
           <h2 className="text-5xl font-bold mt-3">
-            {data?.missing_skills?.split(",").length ?? 0}
+            {
+              data?.missing_skills
+                ?.split(",")
+                .filter(Boolean)
+                .length ?? 0
+            }
           </h2>
 
         </div>
@@ -79,7 +94,7 @@ export default function Dashboard() {
           </p>
 
           <h2 className="text-2xl font-bold mt-3">
-            {data?.target_role ?? "No Analysis"}
+            {data?.target_role ?? "-"}
           </h2>
 
         </div>
