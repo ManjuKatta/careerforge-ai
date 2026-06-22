@@ -27,6 +27,10 @@ export default function Sidebar() {
       path: "/projects",
     },
     {
+      name: "Resume Analyzer",
+      path: "/resume",
+    },
+    {
       name: "History",
       path: "/history",
     },
@@ -49,29 +53,33 @@ export default function Sidebar() {
 
   return (
 
-    <aside className="
-    w-64
-    bg-zinc-900
-    border-r
-    border-zinc-800
-    p-6
-    flex
-    flex-col
-    ">
+    <aside
+      className="
+      w-64
+      bg-zinc-900
+      border-r
+      border-zinc-800
+      p-6
+      flex
+      flex-col
+      "
+    >
 
       {/* Logo */}
 
-      <h1 className="
-      text-3xl
-      font-extrabold
-      bg-gradient-to-r
-      from-blue-400
-      via-violet-500
-      to-cyan-400
-      bg-clip-text
-      text-transparent
-      mb-10
-      ">
+      <h1
+        className="
+        text-3xl
+        font-extrabold
+        bg-gradient-to-r
+        from-blue-400
+        via-violet-500
+        to-cyan-400
+        bg-clip-text
+        text-transparent
+        mb-10
+        "
+      >
         CareerForge
       </h1>
 
@@ -94,9 +102,7 @@ export default function Sidebar() {
 
             ${
               location.pathname === item.path
-
                 ? "bg-blue-500/20 text-blue-400 border border-blue-500/20"
-
                 : "hover:bg-zinc-800 text-zinc-300"
             }
             `}
@@ -112,30 +118,34 @@ export default function Sidebar() {
 
       {/* User Card */}
 
-      <div className="
-      mt-6
-      bg-zinc-800/60
-      border
-      border-zinc-700
-      rounded-2xl
-      p-4
-      ">
+      <div
+        className="
+        mt-6
+        bg-zinc-800/60
+        border
+        border-zinc-700
+        rounded-2xl
+        p-4
+        "
+      >
 
         <div className="flex items-center gap-3">
 
-          <div className="
-          w-12
-          h-12
-          rounded-full
-          bg-gradient-to-r
-          from-violet-500
-          to-blue-500
-          flex
-          items-center
-          justify-center
-          text-lg
-          font-bold
-          ">
+          <div
+            className="
+            w-12
+            h-12
+            rounded-full
+            bg-gradient-to-r
+            from-violet-500
+            to-blue-500
+            flex
+            items-center
+            justify-center
+            text-lg
+            font-bold
+            "
+          >
             {userName?.charAt(0)}
           </div>
 

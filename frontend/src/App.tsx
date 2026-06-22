@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
-
+import Resume from "./pages/Resume";
 import Dashboard from "./pages/Dashboard";
 import Analyze from "./pages/Analyze";
 import Projects from "./pages/Projects";
@@ -98,6 +98,14 @@ function App() {
     </ProtectedRoute>
   }
 />
+<Route
+  path="/resume"
+  element={
+    <ProtectedRoute>
+      <Resume />
+    </ProtectedRoute>
+  }
+/>
 
                   </Routes>
 
@@ -115,6 +123,7 @@ function App() {
           />
 
         )}
+        
 
       </Routes>
 
