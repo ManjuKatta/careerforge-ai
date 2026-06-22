@@ -38,6 +38,10 @@ export default function Sidebar() {
       name: "Settings",
       path: "/settings",
     },
+    {
+  name: "AI Mentor",
+  path: "/mentor",
+},
   ];
 
   function handleLogout() {

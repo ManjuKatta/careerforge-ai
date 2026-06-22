@@ -15,7 +15,9 @@ router = APIRouter(
     tags=["Career"]
 )
 from app.models.user_model import CareerAnalysisRequest
-
+from app.services.ai_career_service import (
+    generate_role_skills
+)
 @router.get("/skills/{role}")
 def get_role_skills(role: str):
 
@@ -63,7 +65,7 @@ def analyze_career(
     current_skills = data.current_skills
     user_id = data.user_id
 
-    required_skills = get_skills(role)
+    required_skills = generate_role_skills(role)["skills"]
 
     missing_skills = calculate_skill_gap(
         role,

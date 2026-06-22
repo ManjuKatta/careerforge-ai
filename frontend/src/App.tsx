@@ -9,6 +9,7 @@ import History from "./pages/History";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AIMentor from "./pages/AIMentor";
 function ProtectedRoute({
   children,
 }: {
@@ -103,6 +104,14 @@ function App() {
   element={
     <ProtectedRoute>
       <Resume />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/mentor"
+  element={
+    <ProtectedRoute>
+      <AIMentor />
     </ProtectedRoute>
   }
 />
