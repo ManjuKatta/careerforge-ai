@@ -1,8 +1,14 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import (
+    APIRouter,
+    UploadFile,
+    File,
+    Form
+)
+
 import os
 
 from app.services.resume_service import (
-    extract_resume_text
+    analyze_resume
 )
 
 router = APIRouter(
@@ -11,8 +17,9 @@ router = APIRouter(
 )
 
 
-@router.post("/upload")
-async def upload_resume(
+@router.post("/analyze")
+async def analyze_uploaded_resume(
+    role: str = Form(...),
     file: UploadFile = File(...)
 ):
 
@@ -37,11 +44,7 @@ async def upload_resume(
             await file.read()
         )
 
-    text = extract_resume_text(
-        file_path
+    return analyze_resume(
+        file_path,
+        role
     )
-
-    return {
-        "filename": file.filename,
-        "text": text[:2000]
-    }
