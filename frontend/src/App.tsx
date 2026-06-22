@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { Navigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 
 import Dashboard from "./pages/Dashboard";
@@ -9,6 +9,21 @@ import History from "./pages/History";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+function ProtectedRoute({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
+  const token =
+    localStorage.getItem("token");
+
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
+
+  return <>{children}</>;
+}
 function App() {
   const token = localStorage.getItem("token");
 
@@ -41,29 +56,48 @@ function App() {
                   <Routes>
 
                     <Route
-                      path="/"
-                      element={<Dashboard />}
-                    />
+  path="/"
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  }
+/>
 
                     <Route
-                      path="/analyze"
-                      element={<Analyze />}
-                    />
+  path="/analyze"
+  element={
+    <ProtectedRoute>
+      <Analyze />
+    </ProtectedRoute>
+  }
+/>
+                    <Route
+  path="/projects"
+  element={
+    <ProtectedRoute>
+      <Projects />
+    </ProtectedRoute>
+  }
+/>
 
                     <Route
-                      path="/projects"
-                      element={<Projects />}
-                    />
+  path="/history"
+  element={
+    <ProtectedRoute>
+      <History />
+    </ProtectedRoute>
+  }
+/>
 
                     <Route
-                      path="/history"
-                      element={<History />}
-                    />
-
-                    <Route
-                      path="/settings"
-                      element={<Settings />}
-                    />
+  path="/settings"
+  element={
+    <ProtectedRoute>
+      <Settings />
+    </ProtectedRoute>
+  }
+/>
 
                   </Routes>
 
