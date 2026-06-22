@@ -92,3 +92,21 @@ def delete_user(
     return {
         "message": "User deleted successfully"
     }
+@router.get("/users/{user_id}")
+def get_user(
+    user_id: int,
+    db: Session = Depends(get_db)
+):
+
+    user = (
+        db.query(UserTable)
+        .filter(UserTable.id == user_id)
+        .first()
+    )
+
+    if not user:
+        return {
+            "message": "User not found"
+        }
+
+    return user
